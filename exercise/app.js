@@ -3,12 +3,12 @@ const app = express();
 const Post = require("./api/models/posts");
 const postData = new Post();
 
+app.use("/uploads", express.static("uploads")); //to make the upload folder publicly available
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   next();
 });
-
-app.use("/uploads", express.static("uploads")); //to make the upload folder publicly available
 
 app.get("/api/posts", (req, res) => {
   res.status(200).send(postData.get());
